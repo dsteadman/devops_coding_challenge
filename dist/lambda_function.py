@@ -1,14 +1,14 @@
 from yaml import safe_load
 from json import dumps
+from chalice import Chalice, Response
 
-def handler(event, context):
+app = Chalice(app_name='list_resources')
+
+@app.route('/api/resources', methods=['GET'])
+def index():
     with open('ebbcarbon.yaml', 'r') as yaml_file:
         contents = safe_load(yaml_file)
 
-        return {
-                "statusCode": 200,
-                "headers": {
-                    "Content-Type": "application/json"
-                    },
-                "body": dumps(contents["resources"])
-                }
+        return Response(body=dumps(contents["resources"],
+                status_code=200,
+                headers={'Content-Type': 'application/json'})
