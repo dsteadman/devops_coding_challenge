@@ -15,8 +15,9 @@ module "list_resources_lambda" {
   package_type   = "Image" # NOTE: "Zip" if this wasn't a dockerized lambda
   architectures  = var.architectures
 
-  image_uri               = "${module.ecr.repository_url}:${var.image_tag}"
-  ignore_source_code_hash = var.ignore_source_code_hash
+  image_uri                  = "${module.ecr.repository_url}:${var.image_tag}"
+  ignore_source_code_hash    = var.ignore_source_code_hash
+  create_lambda_function_url = true
 
   tags = var.tags
 }
