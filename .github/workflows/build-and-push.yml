@@ -46,7 +46,7 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
         with:
-          context: dist
+          context: terraform/environments/${{ vars.ENVIRONMENT }}/dist
 
       - name: Docker Build
         uses: docker/build-push-action@v5
