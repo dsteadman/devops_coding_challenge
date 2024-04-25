@@ -49,8 +49,12 @@ jobs:
           context: terraform/environments/${{ vars.ENVIRONMENT }}/dist
 
       - name: Docker Build
-        run: |
-          ./build.sh ${{ inputs.tag }} ${{ vars.ENVIRONMENT }} ${{ vars.AWS_ACCOUNT_ID }}
+        uses: docker/build-push-action@v5
+        with:
+          context: dist
+          load: true
+          tags: |
+            ${{ vars.AWS_ACCOUNT_ID }}.dkr.ecr.us-west-2.amazonaws.com/ebb-${{ vars.ENVIRONMENT }}-resources-lambda:${{ inputs.tag }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
