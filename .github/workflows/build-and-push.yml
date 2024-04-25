@@ -50,7 +50,7 @@ jobs:
 
       - name: Docker Build
         run: |
-          ./build.sh ${{ inputs.version }} ${{ vars.ENVIRONMENT }} ${{ vars.AWS_ACCOUNT_ID }}
+          ./build.sh ${{ inputs.tag }} ${{ vars.ENVIRONMENT }} ${{ vars.AWS_ACCOUNT_ID }}
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
