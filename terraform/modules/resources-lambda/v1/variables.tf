@@ -39,3 +39,8 @@ variable "tags" {
   type    = map(string)
   default = {}
 }
+
+variable "ignore_source_code_hash" {
+  type    = bool
+  default = true
+}
