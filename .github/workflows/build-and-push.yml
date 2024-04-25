@@ -48,6 +48,9 @@ jobs:
         with:
           context: terraform/environments/${{ vars.ENVIRONMENT }}/dist
 
+      - name: Debugging with tmate
+        uses: mxschmitt/action-tmate@v3.18
+
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
