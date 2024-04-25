@@ -14,7 +14,7 @@ IMAGE_ID=ebb-${ENVIRONMENT}-resources-lambda:${VERSION}
 
 cp data/ebbcarbon.yaml dist
 # docker build --no-cache --progress plain --platform linux/amd64 -t $IMAGE_ID .
-docker build --no-cache --platform linux/amd64 -t ${IMAGE_ID} -f dist/Dockerfile
+docker build --no-cache --platform linux/amd64 -f dist/Dockerfile -t ${IMAGE_ID}
 rm dist/ebbcarbon.yaml
 
 aws ecr get-login-password --region us-west-2 | docker login --username AWS --password-stdin ${AWS_ACCOUNT}.dkr.ecr.us-west-2.amazonaws.com
