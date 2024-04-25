@@ -1,0 +1,23 @@
+name: Deploy to production
+
+on: 
+  workflow_dispatch:
+    inputs:
+      tag:
+        type: string
+        required: true
+        description: The semver we are building and pushing to ECR
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build_and_push:
+    name: Build and push container image
+    uses: ./.github/workflows/build-and-push.yml
+    with:
+      environment: production
+      push: true
+      tag: ${{ inputs.tag }}
+
