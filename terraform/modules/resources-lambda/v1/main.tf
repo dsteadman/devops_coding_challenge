@@ -19,25 +19,3 @@ module "list_resources_lambda" {
 
   tags = var.tags
 }
-
-# module "docker_build_from_ecr" {
-#   source   = "terraform-aws-modules/lambda/aws//modules/docker-build"
-#   ecr_repo = module.ecr.repository_name
-# 
-#   # NOTE: can also allow it to refer to the lambda SHA, but I like human-readable versions.
-#   use_image_tag = true
-#   # NOTE : the second half of using use_image_tag is specifying said image
-#   image_tag = var.image_tag
-# 
-#   source_path = local.source_path
-#   platform    = "linux/amd64"
-# 
-#   # build_args = {
-#   #   FOO = "bar"
-#   # }
-# 
-#   # NOTE: trigger refers to "when terraform sees a change in x, trigger a rebuild"
-#   triggers = {
-#     dir_sha = local.dir_sha
-#   }
-# }
