@@ -27,35 +27,12 @@ module "api_gateway" {
       timeout_milliseconds   = 12000
     }
 
-    # "$default" = {
-    #   lambda_arn = ""
-    # }
+    "$default" = {
+      lambda_arn             = module.list_resources_lambda.lambda_function_arn
+      payload_format_version = "2.0"
+      timeout_milliseconds   = 12000
+    }
   }
-
-  tags = var.tags
-}
-
-
-resource "aws_route53_zone" "primary" {
-  name = var.domain_name
-}
-
-module "primary_acm_certificates" {
-  source  = "terraform-aws-modules/acm/aws"
-  version = "~> 4.0"
-
-  domain_name = aws_route53_zone.primary.name
-  zone_id     = aws_route53_zone.primary.zone_id
-
-  validation_method = "DNS"
-
-  subject_alternative_names = [
-    "*.${aws_route53_zone.primary.name}",
-    aws_route53_zone.primary.name
-
-  ]
-
-  wait_for_validation = true
 
   tags = var.tags
 }
