@@ -6,4 +6,5 @@ module "staging_resources_lambda" {
   environment        = "staging"
   project_name       = "ebb-staging-resources-lambda"
   source_path        = "dist"
+  domain_name        = "nulldoor.com"
 }

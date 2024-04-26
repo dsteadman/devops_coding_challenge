@@ -12,8 +12,8 @@ module "api_gateway" {
   }
 
   # Custom domain
-  domain_name                 = aws_route53_zone.nulldoor.name
-  domain_name_certificate_arn = module.nulldoor_acm_certificates.acm_certificate_arn
+  domain_name                 = aws_route53_zone.primary.name
+  domain_name_certificate_arn = module.primary_acm_certificates.acm_certificate_arn
 
   # Access logs
   # default_stage_access_log_destination_arn = "arn:aws:logs:eu-west-1:835367859851:log-group:debug-apigateway"
@@ -36,22 +36,22 @@ module "api_gateway" {
 }
 
 
-resource "aws_route53_zone" "nulldoor" {
-  name = "nulldoor.com"
+resource "aws_route53_zone" "primary" {
+  name = var.domain_name
 }
 
-module "nulldoor_acm_certificates" {
+module "primary_acm_certificates" {
   source  = "terraform-aws-modules/acm/aws"
   version = "~> 4.0"
 
-  domain_name = aws_route53_zone.nulldoor.name
-  zone_id     = aws_route53_zone.nulldoor.zone_id
+  domain_name = aws_route53_zone.primary.name
+  zone_id     = aws_route53_zone.primary.zone_id
 
   validation_method = "DNS"
 
   subject_alternative_names = [
-    "*.${aws_route53_zone.nulldoor.name}",
-    aws_route53_zone.nulldoor.name
+    "*.${aws_route53_zone.primary.name}",
+    aws_route53_zone.primary.name
 
   ]
 

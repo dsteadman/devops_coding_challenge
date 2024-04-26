@@ -44,3 +44,7 @@ variable "ignore_source_code_hash" {
   type    = bool
   default = true
 }
+
+variable "domain_name" {
+  type = string
+}
