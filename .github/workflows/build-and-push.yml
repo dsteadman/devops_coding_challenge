@@ -46,6 +46,12 @@ jobs:
       - name: Setup Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Copy data file
+        run : |
+          cp data/ebbcarbon.yaml dist
+          cd dist
+          ls -la
+
       - name: Docker Build
         uses: docker/build-push-action@v5
         with:
