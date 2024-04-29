@@ -7,7 +7,10 @@
 5. Create a PR and tag us on that when you're done.
 
 ---
-# Dan Steadman - Notes
+# Dan Steadman
+The function endpoint is available at https://nulldoor.com/api/resources
+
+## Notes
 
 ## IaC
 I'm using Terraform and leveraging the popular and very well maintained modules from the `terraform-aws-modules` namespace. They're nice in that they are quite versatile and take care of much of the boilerplate. They leave us with a clean module where we are only writing `resources` where services have to be knit together for our specific use case.
