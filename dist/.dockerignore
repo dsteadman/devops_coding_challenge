@@ -1,6 +1,5 @@
 *
-!requirements.txt
-!ebbcarbon.yaml
+!*.yaml
 !lambda_function.py
 !pyproject.toml
 !poetry.lock
