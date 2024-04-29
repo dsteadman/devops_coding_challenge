@@ -44,10 +44,10 @@ module "error_alarm" {
   version = "~> 3.0"
 
   alarm_name          = "${var.project_name}-error-alarm"
-  alarm_description   = "Errors recorded in ${module.api_gateway_log_group.cloudwatch_log_group_name}"
+  alarm_description   = "Errors in ${var.project_name} recorded in ${module.api_gateway_log_group.cloudwatch_log_group_name}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
-  threshold           = 10
+  threshold           = 5 # don't want to be too trigger happy but also a simple GET endpoint like this shouldn't be erroring
   period              = 60
   unit                = "Count"
 
