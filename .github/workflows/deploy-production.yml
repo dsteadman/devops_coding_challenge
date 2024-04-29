@@ -1,12 +1,9 @@
 name: Deploy to production
 
-on: 
-  workflow_dispatch:
-    inputs:
-      tag:
-        type: string
-        required: true
-        description: The semver we are building and pushing to ECR
+on:
+  push:
+    tags:
+      - '*'
 
 permissions:
   id-token: write
@@ -19,5 +16,5 @@ jobs:
     with:
       environment: production
       push: true
-      tag: ${{ inputs.tag }}
+      tag: ${{ github.ref_name }}
 
