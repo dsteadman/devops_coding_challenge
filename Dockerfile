@@ -1,6 +1,6 @@
 FROM public.ecr.aws/lambda/python:3.12
 
-COPY ./dist/ebbcarbon.yaml ${LAMBDA_TASK_ROOT}
+COPY ./data/ebbcarbon.yaml ${LAMBDA_TASK_ROOT}
 
 RUN pip install poetry \
   && export PATH=$HOME/.local/bin:$PATH \
