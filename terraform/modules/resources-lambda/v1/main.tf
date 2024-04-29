@@ -18,5 +18,9 @@ module "list_resources_lambda" {
   image_uri               = "${module.ecr.repository_url}:${var.image_tag}"
   ignore_source_code_hash = var.ignore_source_code_hash
 
+  policies           = var.lambda_role_policy_arns
+  attach_policies    = true
+  number_of_policies = length(var.lambda_role_policy_arns)
+
   tags = var.tags
 }

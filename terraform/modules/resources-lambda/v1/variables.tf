@@ -48,3 +48,8 @@ variable "ignore_source_code_hash" {
 variable "domain_name" {
   type = string
 }
+
+variable "lambda_role_policy_arns" {
+  type    = list(string)
+  default = []
+}

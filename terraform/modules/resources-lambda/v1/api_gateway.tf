@@ -26,12 +26,6 @@ module "api_gateway" {
       payload_format_version = "2.0"
       timeout_milliseconds   = 12000
     }
-
-    "$default" = {
-      lambda_arn             = module.list_resources_lambda.lambda_function_arn
-      payload_format_version = "2.0"
-      timeout_milliseconds   = 12000
-    }
   }
 
   tags = var.tags
@@ -50,7 +44,7 @@ module "error_alarm" {
   version = "~> 3.0"
 
   alarm_name          = "${var.project_name}-error-alarm"
-  alarm_description   = "Bad errors in ${module.api_gateway_log_group.cloudwatch_log_group_name}"
+  alarm_description   = "Errors recorded in ${module.api_gateway_log_group.cloudwatch_log_group_name}"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods  = 1
   threshold           = 10
@@ -60,6 +54,13 @@ module "error_alarm" {
   namespace   = var.project_name
   metric_name = "ErrorCount"
   statistic   = "Maximum"
+}
 
-  # alarm_actions = ["arn:aws:sns:eu-west-1:835367859852:my-sns-queue"]
+resource "aws_lambda_permission" "lambda_permission" {
+  statement_id  = "allow-api-gateway-invocation"
+  action        = "lambda:InvokeFunction"
+  function_name = var.project_name
+  principal     = "apigateway.amazonaws.com"
+
+  source_arn = "${module.api_gateway.apigatewayv2_api_execution_arn}/*"
 }
