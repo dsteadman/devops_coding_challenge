@@ -1,5 +1,6 @@
 *
 .*
+!data/ebbcarbon.yaml
 !dist/ebbcarbon.yaml
 !dist/lambda_function.py
 !dist/pyproject.toml
